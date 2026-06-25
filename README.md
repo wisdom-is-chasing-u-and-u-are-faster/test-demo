@@ -1,2 +1,3 @@
-# test-demo
-For git and pr agent demo test on VM.
+# Test Demo Repository
+
+This repository contains a basic webpage created by an AI agent.
