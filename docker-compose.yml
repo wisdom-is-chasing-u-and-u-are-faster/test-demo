@@ -1,0 +1,79 @@
+version: '3.8'
+
+services:
+  alas-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: alas_api_service
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://alas_user:alas_secure_pass_2026@alas-postgres:5432/alas_db
+      - REDIS_URL=redis://alas-redis:6379/0
+      - HOST=0.0.0.0
+      - PORT=8000
+      - ENVIRONMENT=production
+      - JWT_SECRET_KEY=alas-super-secret-enterprise-key-change-in-prod-2026
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+    depends_on:
+      alas-postgres:
+        condition: service_healthy
+      alas-redis:
+        condition: service_started
+    networks:
+      - alas-network
+
+  alas-postgres:
+    image: postgres:16-alpine
+    container_name: alas_postgres_db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=alas_user
+      - POSTGRES_PASSWORD=alas_secure_pass_2026
+      - POSTGRES_DB=alas_db
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /var/run/postgresql
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+      - ./db/seed.sql:/docker-entrypoint-initdb.d/02_seed.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U alas_user -d alas_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - alas-network
+
+  alas-redis:
+    image: redis:7-alpine
+    container_name: alas_redis_cache
+    ports:
+      - "6379:6379"
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+    volumes:
+      - redis_data:/data
+    networks:
+      - alas-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  alas-network:
+    driver: bridge

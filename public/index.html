@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Loan Approval System (ALAS)</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header class="navbar">
+        <a href="/index.html" class="navbar-brand">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            <span data-i18n="app_title">Automated Loan Approval System</span>
+        </a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/index.html" class="active" data-i18n="nav_home">Home</a></li>
+                <li><a href="/pages/loan-intake.html" data-i18n="nav_intake">Apply for Loan</a></li>
+                <li><a href="/pages/status-check.html" data-i18n="nav_status">Check Status</a></li>
+                <li><a href="/pages/underwriter-dashboard.html" data-i18n="nav_worklist">Underwriter Worklist</a></li>
+                <li><a href="/pages/analytics-dashboard.html" data-i18n="nav_analytics">Analytics</a></li>
+            </ul>
+        </nav>
+        <div class="nav-actions">
+            <select id="langSelect" class="select-control" onchange="setLanguage(this.value)">
+                <option value="en-US">English (US)</option>
+                <option value="es-US">Español (US)</option>
+            </select>
+            <button id="themeToggleBtn" class="btn" title="Toggle Light/Dark Theme">🌓</button>
+            <span id="userDisplay" style="font-size: 0.85rem; font-weight: 500; color: var(--text-secondary);"></span>
+            <a id="authNavBtn" href="/pages/login.html" class="btn btn-primary" data-i18n="nav_login">Login</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <div class="card" style="background: linear-gradient(135deg, hsl(210, 85%, 45%), hsl(207, 85%, 35%)); color: white; padding: 3rem 2rem; border: none;">
+            <h1 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 0.75rem;" data-i18n="hero_title">Enterprise Automated Lending Platform</h1>
+            <p style="font-size: 1.1rem; opacity: 0.9; max-width: 700px; margin-bottom: 1.5rem;" data-i18n="hero_subtitle">
+                Straight-Through Credit Decisioning in under 15 seconds powered by resilient bureau gateways and deterministic policy rules.
+            </p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="/pages/loan-intake.html" class="btn" style="background: white; color: hsl(210, 85%, 45%); font-weight: 600; text-decoration: none;" data-i18n="btn_apply_now">Start Digital Application</a>
+                <a href="/pages/status-check.html" class="btn" style="background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.4); text-decoration: none;" data-i18n="btn_check_status">Check Application Status</a>
+                <a href="/pages/underwriter-dashboard.html" class="btn" style="background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.4); text-decoration: none;" data-i18n="btn_view_dashboard">Underwriter Worklist</a>
+            </div>
+        </div>
+
+        <!-- Telemetry KPI Overview -->
+        <div class="grid-cols-4" id="analyticsDashboard">
+            <div class="card metric-card">
+                <span class="metric-title" data-i18n="lbl_stp_rate">Straight-Through Processing</span>
+                <span class="metric-value" id="metricStpRate" style="color: var(--color-success);">74.2%</span>
+                <span class="metric-subtitle">Target: &gt; 70.0% STP</span>
+            </div>
+            <div class="card metric-card">
+                <span class="metric-title" data-i18n="lbl_p95_latency">P95 Decision Latency</span>
+                <span class="metric-value" id="metricP95Latency">4.8s</span>
+                <span class="metric-subtitle">SLA: &lt; 15.0s</span>
+            </div>
+            <div class="card metric-card">
+                <span class="metric-title" data-i18n="lbl_today_volume">Applications Today</span>
+                <span class="metric-value" id="metricTotalToday">3,480</span>
+                <span class="metric-subtitle">+18% vs 30-day baseline</span>
+            </div>
+            <div class="card metric-card">
+                <span class="metric-title" data-i18n="lbl_conversion_rate">Conversion Rate</span>
+                <span class="metric-value" id="metricConversionRate" style="color: var(--color-primary);">32.5%</span>
+                <span class="metric-subtitle">Target: +28% increase</span>
+            </div>
+        </div>
+
+        <!-- System Architecture Features -->
+        <div class="grid-cols-2">
+            <div class="card">
+                <h3 style="margin-bottom: 1rem; color: var(--color-primary);">🚀 Platform Architecture Features</h3>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem;">
+                    <li>🛡️ <strong>Resilient Bureau Gateways:</strong> Experian & Equifax adapters with circuit-breaking fallback.</li>
+                    <li>⚡ <strong>Deterministic Policy Engine:</strong> Stateless DMN credit rule evaluation with 100% reproducibility.</li>
+                    <li>📜 <strong>WORM Audit Ledger:</strong> Immutable Write-Once-Read-Many regulatory compliance log.</li>
+                    <li>📬 <strong>Multi-Channel Dispatcher:</strong> Automated delivery of FCRA/ECOA adverse action notices.</li>
+                    <li>♿ <strong>WCAG 2.1 AA & Localization:</strong> Multilingual support for English (en-US) and Spanish (es-US).</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 style="margin-bottom: 1rem; color: var(--color-primary);">🎯 Quick Screen Navigation</h3>
+                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    <a href="/pages/loan-intake.html" class="btn btn-primary" style="text-decoration: none; text-align: center;">1. Digital Loan Intake Form</a>
+                    <a href="/pages/status-check.html" class="btn" style="text-decoration: none; text-align: center;">2. Applicant Status Lookup</a>
+                    <a href="/pages/underwriter-dashboard.html" class="btn" style="text-decoration: none; text-align: center;">3. Underwriter Worklist Portal</a>
+                    <a href="/pages/case-review.html" class="btn" style="text-decoration: none; text-align: center;">4. Case Review & Adjudication Console</a>
+                    <a href="/pages/analytics-dashboard.html" class="btn" style="text-decoration: none; text-align: center;">5. Analytics & Telemetry Dashboard</a>
+                    <a href="/pages/login.html" class="btn" style="text-decoration: none; text-align: center;">6. Authentication & Role Switcher</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Automated Loan Approval System (ALAS) &bull; Enterprise Straight-Through Lending Architecture &bull; WCAG 2.1 AA Compliant</p>
+    </footer>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/i18n.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>

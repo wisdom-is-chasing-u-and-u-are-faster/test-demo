@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics & Reporting Dashboard - ALAS</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header class="navbar">
+        <a href="/index.html" class="navbar-brand">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            <span data-i18n="app_title">Automated Loan Approval System</span>
+        </a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/index.html" data-i18n="nav_home">Home</a></li>
+                <li><a href="/pages/loan-intake.html" data-i18n="nav_intake">Apply for Loan</a></li>
+                <li><a href="/pages/status-check.html" data-i18n="nav_status">Check Status</a></li>
+                <li><a href="/pages/underwriter-dashboard.html" data-i18n="nav_worklist">Underwriter Worklist</a></li>
+                <li><a href="/pages/analytics-dashboard.html" class="active" data-i18n="nav_analytics">Analytics</a></li>
+            </ul>
+        </nav>
+        <div class="nav-actions">
+            <select id="langSelect" class="select-control" onchange="setLanguage(this.value)">
+                <option value="en-US">English (US)</option>
+                <option value="es-US">Español (US)</option>
+            </select>
+            <button id="themeToggleBtn" class="btn">🌓</button>
+            <a href="/pages/login.html" class="btn btn-primary" data-i18n="nav_login">Login</a>
+        </div>
+    </header>
+
+    <main class="container" id="analyticsDashboard">
+        <div class="card" style="margin-bottom: 2rem;">
+            <h2 style="color: var(--color-primary); margin-bottom: 0.25rem;">Executive Analytics & Telemetry Console</h2>
+            <p style="color: var(--text-muted);">Real-time performance monitoring, STP conversion rates, and decision SLA tracking.</p>
+        </div>
+
+        <div id="analyticsError" class="badge badge-danger" style="display: none; width: 100%; margin-bottom: 1.5rem; padding: 0.75rem; text-align: center;"></div>
+
+        <!-- KPI Grid -->
+        <div class="grid-cols-4" style="margin-bottom: 2rem;">
+            <div class="card metric-card">
+                <span class="metric-title" data-i18n="lbl_stp_rate">STP Decision Rate</span>
+                <span id="metricStpRate" class="metric-value" style="color: var(--color-success);">74.2%</span>
+                <span class="metric-subtitle">Target: &gt; 70.0%</span>
+            </div>
+            <div class="card metric-card">
+                <span class="metric-title" data-i18n="lbl_p95_latency">P95 Decision Latency</span>
+                <span id="metricP95Latency" class="metric-value">4.8s</span>
+                <span class="metric-subtitle">SLA: &lt; 15.0s</span>
+            </div>
+            <div class="card metric-card">
+                <span class="metric-title" data-i18n="lbl_today_volume">Volume Today</span>
+                <span id="metricTotalToday" class="metric-value">3,480</span>
+                <span class="metric-subtitle">1,200 TPS capacity</span>
+            </div>
+            <div class="card metric-card">
+                <span class="metric-title" data-i18n="lbl_conversion_rate">Conversion Rate</span>
+                <span id="metricConversionRate" class="metric-value" style="color: var(--color-primary);">32.5%</span>
+                <span class="metric-subtitle">+28% YoY Growth</span>
+            </div>
+        </div>
+
+        <!-- Decision Breakdown & Hourly Throughput -->
+        <div class="grid-cols-2">
+            <div class="card">
+                <h3 style="color: var(--color-primary); margin-bottom: 1.5rem;">🎯 Today's Decision Breakdown</h3>
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; background: var(--bg-main); border-radius: var(--radius-sm);">
+                        <span style="font-weight: 600;">Straight-Through Approved:</span>
+                        <span id="statApproved" class="badge badge-success" style="font-size: 1rem; padding: 0.35rem 0.75rem;">2,580</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; background: var(--bg-main); border-radius: var(--radius-sm);">
+                        <span style="font-weight: 600;">Underwriter Manual Review:</span>
+                        <span id="statReview" class="badge badge-warning" style="font-size: 1rem; padding: 0.35rem 0.75rem;">420</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; background: var(--bg-main); border-radius: var(--radius-sm);">
+                        <span style="font-weight: 600;">Automated Rejections (FCRA):</span>
+                        <span id="statRejected" class="badge badge-danger" style="font-size: 1rem; padding: 0.35rem 0.75rem;">480</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="color: var(--color-primary); margin-bottom: 1rem;">📈 System Health & Compliance</h3>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem;">
+                    <li>✅ <strong>Availability:</strong> 99.99% Multi-Zone Aurora & Cloud Run.</li>
+                    <li>✅ <strong>Disaster Recovery:</strong> RPO = 0, Regional RTO &lt; 15 min.</li>
+                    <li>✅ <strong>WORM Audit Trail:</strong> 100% immutable transaction logs.</li>
+                    <li>✅ <strong>Zero Trust Security:</strong> Envelope encryption (AES-256-GCM) with mTLS.</li>
+                    <li>✅ <strong>Equal Credit Opportunity:</strong> Bias-free deterministic rule container.</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Automated Loan Approval System (ALAS) &bull; WCAG 2.1 AA Compliant</p>
+    </footer>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/i18n.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>
