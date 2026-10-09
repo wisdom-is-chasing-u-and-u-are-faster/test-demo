@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Automated Loan Approval System</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header class="navbar">
+        <a href="/index.html" class="navbar-brand">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            <span data-i18n="app_title">Automated Loan Approval System</span>
+        </a>
+        <div class="nav-actions">
+            <select id="langSelect" class="select-control" onchange="setLanguage(this.value)">
+                <option value="en-US">English (US)</option>
+                <option value="es-US">Español (US)</option>
+            </select>
+            <button id="themeToggleBtn" class="btn">🌓</button>
+        </div>
+    </header>
+
+    <main class="container" style="max-width: 500px; margin-top: 3rem;">
+        <div class="card">
+            <h2 style="margin-bottom: 0.5rem; text-align: center; color: var(--color-primary);" data-i18n="nav_login">Account Login</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 1.5rem;">Access the Underwriter Worklist and Adjudication Portal</p>
+
+            <div id="loginError" class="badge badge-danger" style="display: none; width: 100%; margin-bottom: 1rem; padding: 0.75rem; text-align: center;"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label" for="loginEmail" data-i18n="lbl_email">Email Address</label>
+                    <input type="email" id="loginEmail" class="form-input" value="underwriter@bank.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" class="form-input" value="demo123" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="loginRole">Select System Role</label>
+                    <select id="loginRole" class="form-select">
+                        <option value="Underwriter">Underwriter (Case Adjudication)</option>
+                        <option value="Operator">Operator (Transaction Ingestion)</option>
+                        <option value="Admin">System Administrator</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem; font-weight: 600;">Sign In</button>
+            </form>
+
+            <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); text-align: center;">
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">One-Click Demo Logins:</p>
+                <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
+                    <button type="button" class="btn btn-demo-login" data-role="Underwriter" style="font-size: 0.8rem;">Underwriter</button>
+                    <button type="button" class="btn btn-demo-login" data-role="Operator" style="font-size: 0.8rem;">Operator</button>
+                    <button type="button" class="btn btn-demo-login" data-role="Admin" style="font-size: 0.8rem;">Admin</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Automated Loan Approval System (ALAS) &bull; WCAG 2.1 AA Compliant</p>
+    </footer>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/i18n.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>
